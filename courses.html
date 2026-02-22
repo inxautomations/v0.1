@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<title>Courses - INX Demo v0.1</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#333;line-height:1.6}
+
+/* HEADER */
+header{
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:#fff;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 2px 10px rgba(0,0,0,.1)
+}
+.header-container{
+max-width:1200px;
+margin:auto;
+padding:1rem 20px;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+.logo{font-size:1.8rem;font-weight:bold;color:#fff;text-decoration:none}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:2rem
+}
+nav ul li a{
+color:#fff;
+text-decoration:none;
+font-weight:500
+}
+nav ul li a:hover{color:#ffd700}
+
+.hamburger{
+display:none;
+flex-direction:column;
+gap:5px;
+cursor:pointer
+}
+.hamburger span{
+width:25px;
+height:3px;
+background:#fff
+}
+
+/* HERO */
+.hero{
+background:linear-gradient(rgba(102,126,234,.85),rgba(118,75,162,.85));
+color:#fff;
+padding:100px 20px;
+text-align:center
+}
+.hero h1{font-size:3rem;margin-bottom:1rem}
+.hero p{font-size:1.3rem;margin-bottom:2rem}
+
+.btn{
+display:inline-block;
+padding:12px 30px;
+background:#ffd700;
+color:#333;
+border-radius:5px;
+font-weight:bold;
+text-decoration:none;
+margin:5px
+}
+.btn-secondary{background:#fff;color:#667eea}
+
+/* SECTIONS */
+.container{max-width:1200px;margin:auto;padding:60px 20px}
+h2{text-align:center;color:#667eea;font-size:2.5rem;margin-bottom:2rem}
+
+/* ABOUT */
+.about-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:3rem;
+align-items:center
+}
+.about-image{
+height:300px;
+border-radius:10px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-size:5rem
+}
+
+/* COURSES */
+.courses-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:2rem
+}
+.course-card{
+background:#fff;
+padding:2rem;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+.course-card h3{color:#667eea;margin-bottom:1rem}
+.course-card ul{list-style:none}
+.course-card ul li{padding:.5rem 0;border-bottom:1px solid #eee}
+.course-card ul li::before{content:"✓ ";color:#667eea;font-weight:bold}
+
+/* FACULTY */
+.faculty-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:2rem
+}
+.faculty-card{
+text-align:center;
+background:#fff;
+padding:2rem;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+.faculty-image{
+width:150px;
+height:150px;
+margin:auto auto 1rem;
+border-radius:50%;
+background:linear-gradient(135deg,#667eea,#764ba2);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:3rem;
+color:#fff
+}
+
+/* TESTIMONIALS */
+.testimonials-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:2rem
+}
+.testimonial-card{
+background:#f9f9f9;
+padding:2rem;
+border-left:4px solid #667eea;
+border-radius:10px
+}
+
+/* INFO */
+.info-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:3rem
+}
+.info-card{
+background:#fff;
+padding:2rem;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+.info-card h3{color:#667eea;margin-bottom:1rem}
+.info-card ul{list-style:none}
+.info-card ul li{padding:.8rem 0;border-bottom:1px solid #eee}
+
+/* CTA */
+.cta{
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:#fff;
+text-align:center;
+padding:60px 20px;
+border-radius:10px
+}
+
+/* FOOTER */
+footer{
+background:#2c3e50;
+color:#fff;
+padding:40px 20px 20px
+}
+.footer-content{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:2rem
+}
+.footer-section h3{color:#ffd700;margin-bottom:1rem}
+.footer-section ul{list-style:none}
+.footer-section ul li{margin-bottom:.5rem}
+.footer-section a{color:#fff;text-decoration:none}
+.social-links{display:flex;gap:1rem;font-size:1.5rem}
+.copyright{text-align:center;margin-top:2rem;border-top:1px solid #444;padding-top:1rem}
+
+/* FLOATING */
+.floating-buttons{
+position:fixed;
+bottom:20px;
+right:20px
+}
+.floating-btn{
+background:#667eea;
+color:#fff;
+padding:12px 25px;
+border-radius:25px;
+text-decoration:none;
+font-weight:bold
+}
+.whatsapp-float{
+position:fixed;
+bottom:90px;
+right:20px
+}
+.whatsapp-icon{
+width:60px;
+height:60px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:2rem;
+color:#fff
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.hamburger{display:flex}
+nav ul{
+position:absolute;
+top:70px;
+left:0;
+right:0;
+flex-direction:column;
+background:#667eea;
+max-height:0;
+overflow:hidden;
+transition:max-height .4s ease
+}
+nav ul.active{max-height:500px}
+.about-content,.info-grid{grid-template-columns:1fr}
+.hero h1{font-size:2rem}
+}
+nav ul li a {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    text-align: center;
+}
+
+/* ===== GLOBAL HOVER TRANSITIONS ===== */
+a,
+.btn,
+.course-card,
+.faculty-card,
+.testimonial-card,
+.social-links a,
+.floating-btn,
+.whatsapp-icon {
+    transition: all 0.3s ease;
+}
+
+/* ===== NAV LINKS ===== */
+nav ul li a:hover {
+    color: #ffd700;
+}
+
+/* ===== BUTTONS ===== */
+.btn:hover {
+    background: #ffed4e;
+    transform: translateY(-1px);
+}
+
+.btn-secondary:hover {
+    background: #f0f0f0;
+    transform: translateY(-1px);
+}
+
+/* ===== COURSE CARDS ===== */
+.course-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ===== FACULTY CARDS ===== */
+.faculty-card:hover {
+    transform: scale(1.02);
+}
+
+/* ===== TESTIMONIAL CARDS ===== */
+.testimonial-card:hover {
+    background: #f0f0f0;
+}
+
+/* ===== FOOTER LINKS ===== */
+.footer-section ul li a:hover {
+    color: #ffd700;
+}
+
+/* ===== SOCIAL ICONS ===== */
+.social-links a:hover {
+    color: #ffd700;
+    transform: scale(1.2);
+}
+
+/* ===== FLOATING CTA ===== */
+.floating-btn:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+/* ===== WHATSAPP FLOAT ===== */
+.whatsapp-icon:hover {
+    transform: scale(1.12);
+}
+.cta h2,
+.cta p {
+    color: #ffffff;
+}
+.cta h2 {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-container">
+<a class="logo" href="https://inxautomations.github.io/demo.v0.1/">INX Demo v0.1</a>
+<div class="hamburger" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
+<nav>
+<ul id="navMenu">
+<li><a href="https://inxautomations.github.io/demo.v0.1/">Home</a></li>
+<li><a href="https://inxautomations.github.io/demo.v0.1/about">About</a></li>
+<li><a href="https://inxautomations.github.io/demo.v0.1/courses">Courses</a></li>
+<li><a href="https://inxautomations.github.io/demo.v0.1/faculty">Faculty</a></li>
+<li><a href="https://inxautomations.github.io/demo.v0.1/enquire">Enquire now</a></li>
+<li><a href="https://inxautomations.github.io/demo.v0.1/axf">Admission & Fees</a></li>
+<li><a href="https://inxautomations.github.io/demo.v0.1/faqs">FAQs</a></li>
+<li><a href="https://wa.me/+919534972193">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+    <!-- Courses Section -->
+    <section id="courses" class="container">
+        <h2>Our Courses</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <h3>JEE Main & Advanced</h3>
+                <ul>
+                    <li>Comprehensive curriculum</li>
+                    <li>Expert faculty</li>
+                    <li>Regular mock tests</li>
+                    <li>Doubt clearing sessions</li>
+                </ul>
+                <a href="https://inxautomations.github.io/demo.v0.1/enquire" class="btn">Enroll Now</a>
+            </div>
+            <div class="course-card">
+                <h3>NEET Preparation</h3>
+                <ul>
+                    <li>Medical entrance coaching</li>
+                    <li>Biology, Physics, Chemistry</li>
+                    <li>Practice tests</li>
+                    <li>Study materials included</li>
+                </ul>
+                <a href="https://inxautomations.github.io/demo.v0.1/enquire" class="btn">Enroll Now</a>
+            </div>
+            <div class="course-card">
+                <h3>Class 10th & 12th Boards</h3>
+                <ul>
+                    <li>All subjects covered</li>
+                    <li>Board exam focused</li>
+                    <li>Regular assessments</li>
+                    <li>Individual attention</li>
+                </ul>
+                <a href="https://inxautomations.github.io/demo.v0.1/enquire" class="btn">Enroll Now</a>
+            </div>
+            <div class="course-card">
+                <h3>Foundation Courses</h3>
+                <ul>
+                    <li>Classes 6th to 9th</li>
+                    <li>Strong conceptual base</li>
+                    <li>Interactive learning</li>
+                    <li>Olympiad preparation</li>
+                </ul>
+                <a href="https://inxautomations.github.io/demo.v0.1/enquire" class="btn">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+
+   <!-- CTA Section -->
+    <section class="container">
+        <div class="cta">
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Join thousands of successful students who achieved their dreams with us</p>
+            <a href="https://inxautomations.github.io/demo.v0.1/enquire" class="btn">Enquire Now</a>
+        </div>
+    </section>
+    <section class="container"><u><b><p style="text-align: center;">IMPORTANT NOTICE</p></b></u>
+        <p style="text-align: center;">This page is a demo version (v0.1) created for demonstration and testing purposes.</p>
+    <p style="text-align: center;">It is not production-ready and does not represent the final or secured implementation.</p>
+    <p style="text-align: center;">A confirmation email may be sent after submitting the enquiry form when the system is active.</p></section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Education Street, Patna - 800001</li>
+                    <li><i class="fas fa-phone"></i><a href="tel:+919534972193"> +91 9534972193 </a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:automations.inx@gmail.com">automations.inx@gmail.com</a></li>
+                    <li><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 8:00 PM</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://inxautomations.github.io/demo.v0.1/">Home</a></li>
+                    <li><a href="https://inxautomations.github.io/demo.v0.1/about">About Us</a></li>
+                    <li><a href="https://inxautomations.github.io/demo.v0.1/courses">Courses</a></li>
+                    <li><a href="https://inxautomations.github.io/demo.v0.1/faculty">Faculty</a></li>
+                    <li><a href="https://wa.me/+919534972193">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+    <a href="https://www.instagram.com/inxtechnologies" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.facebook.com/profile.php?id=61583543771896" target="_blank" aria-label="Facebook Page"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://www.youtube.com/@inxtechnologies" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://x.com/inxtechin" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://www.linkedin.com/in/inx-t-5b7029399" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+<div class="copyright">
+<p>&copy; 2026, INX Technologies All Rights Reserved.</p>
+</div>
+</footer>
+
+<div class="floating-buttons">
+<a href="https://inxautomations.github.io/demo.v0.1/enquire" class="floating-btn">Enquire Now</a>
+</div>
+
+<a href="https://wa.me/+919534972193" target="_blank" class="whatsapp-float">
+<div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+</a>
+
+<script>
+function toggleMenu(){
+document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
